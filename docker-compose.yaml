@@ -1,0 +1,54 @@
+---
+version: '2.1'
+
+volumes:
+  etcd:
+
+services:
+  aperture:
+    image: lightninglabs/aperture:v0.1.18-beta
+    network_mode: host
+    volumes:
+      - ./aperture/aperture.yaml:/root/.aperture/aperture.yaml
+      - ./aperture/static:/root/.aperture/static
+      - ./aperture/lnd:/root/.lnd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: '2'
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./api
+    image: bloxseer:v0.1.0-alpha
+    environment:
+      - FLASK_APP=/app/api.py
+    command: ["python", "-m", "flask", "run", "--host=0.0.0.0"]
+    ports:
+      - "5000:5000"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: '2'
+
+  etcd:
+    image: bitnami/etcd:3.5.3
+    restart: unless-stopped
+    ports:
+      - 2379:2379
+      - 2380:2380
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_AUTO_COMPACTION_RETENTION=1000
+      - ETCD_AUTO_COMPACTION_MODE=revision
+    volumes:
+      - etcd
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+        max-file: '2'
