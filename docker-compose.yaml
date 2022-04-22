@@ -35,6 +35,24 @@ services:
         max-size: 100m
         max-file: '2'
 
+  bitcoin-s:
+    image: bitcoinscala/bitcoin-s-server:latest
+    command: ['--conf','/home/bitcoin-s/.bitcoin-s/bitcoin-s.conf']
+    environment:
+      - 'BITCOIN_S_NETWORK=testnet3'
+      - 'BITCOIN_S_NODE_MODE=neutrino'
+      - 'BITCOIN_S_NODE_PEERS=neutrino.testnet.lightningcluster.com:18333'
+      - 'BITCOIN_S_RPC_BIND=0.0.0.0'
+      - 'BITCOIN_S_SERVER_RPC_PASSWORD=bloxseer'
+      #- 'BITCOIN_S_NODE_PEERS=neutrino.testnet3.suredbits.com:18333,neutrino.testnet.lightningcluster.com:18333'
+      #- 'BITCOIN_S_NODE_PEERS=neutrino.testnet3.suredbits.com:18333'
+    ports:
+      - "9999:9999"
+      - "19999:19999"
+    volumes:
+      - ./bitcoin-s:/home/bitcoin-s/.bitcoin-s/
+
+  # https://github.com/bitnami/bitnami-docker-etcd
   etcd:
     image: bitnami/etcd:3.5.3
     restart: unless-stopped
@@ -46,7 +64,7 @@ services:
       - ETCD_AUTO_COMPACTION_RETENTION=1000
       - ETCD_AUTO_COMPACTION_MODE=revision
     volumes:
-      - etcd
+      - etcd:/bitnami/etcd
     logging:
       driver: "json-file"
       options:

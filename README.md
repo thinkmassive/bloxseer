@@ -77,3 +77,13 @@ For a walkthrough of how to pay an LSAT invoice, and a deeper dive into
 Aperture, watch Elle Mouton's [Aperture Dynamic Prices
 Demo](https://www.youtube.com/watch?v=Y2ZG-qcw7Sw). You may also want to
 try the [Alby](https://getalby.com/) browser extension.
+
+Wait for the bitcoin-s neutrino client to sync the testnet chain.
+
+Test `bitcoin-s`:
+
+```
+curl -v -i -u bitcoins:topsecret --data-binary \
+  '{"jsonrpc": "1.0", "id": "curltest", "method": "getinfo", "params":[]}' \
+  -H "Content-Type: application/json" http://127.0.0.1:9999/
+```

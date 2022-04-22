@@ -1,2 +1,6 @@
 aperture/lnd/*.macaroon
 aperture/lnd/tls.*
+bitcoin-s/seeds
+bitcoin-s/testnet
+bitcoin-s/testnet3
+bitcoin-s/tor
