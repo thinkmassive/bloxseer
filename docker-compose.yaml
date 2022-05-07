@@ -35,6 +35,17 @@ services:
         max-size: 100m
         max-file: '2'
 
+  bitcoin-exporter:
+    image: jvstein/bitcoin-prometheus-exporter:v0.7.0
+    environment:
+      - LOG_LEVEL=DEBUG
+      - BITCOIN_RPC_USER=${BITCOIN_RPC_USER:-bitcoin}
+      - BITCOIN_RPC_PASSWORD=${BITCOIN_RPC_PASSWORD:-bitcoin}
+      - BITCOIN_RPC_HOST=${BITCOIN_RPC_HOST:-localhost}
+      - BITCOIN_RPC_PORT=${BITCOIN_RPC_PORT:-8332}
+    ports:
+      - "9332:9332"
+
   etcd:
     image: bitnami/etcd:3.5.3
     restart: unless-stopped
@@ -52,3 +63,14 @@ services:
       options:
         max-size: 100m
         max-file: '2'
+
+  prometheus:
+    image: docker.io/prom/prometheus:v2.35.0
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:z
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 100m
+    ports:
+      - "9090:9090"
