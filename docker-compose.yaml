@@ -46,7 +46,7 @@ services:
       - ETCD_AUTO_COMPACTION_RETENTION=1000
       - ETCD_AUTO_COMPACTION_MODE=revision
     volumes:
-      - etcd
+      - etcd:/bitnami/etcd
     logging:
       driver: "json-file"
       options:
