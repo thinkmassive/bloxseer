@@ -2,6 +2,8 @@
 
 _Chain-data DLC Oracle-as-a-Service API Server_
 
+**This project is incomplete! Alpha release development is underway.**
+
 ## Overview
 
 Bloxseer is an oracle management server for discreet log contract (DLC)
@@ -27,6 +29,63 @@ LND required at this time).
 
 High-level architecture:
 ![Software architecture diagram](docs/overview.png)
+
+---
+
+## Alpha Release Functionality
+
+The alpha release will be very limited in scope, primarily targeting
+measurements of taproot adoption. A few other very simple measurements
+may also be included.
+
+- **Simple [enumerated
+  outcomes](https://github.com/discreetlogcontracts/dlcspecs/blob/master/Oracle.md#simple-enumeration)**
+  - All announcements will be simple yes/no (possible 3rd state for draw)
+- Event duration: up to ~70 days
+  - Start block should be at least 6 (up to 2016) blocks from chain tip
+  - Maturation block should be within 10080 blocks of start block
+  - Subject to change, depending on block processing and recommendations
+    from the DLC experts
+- Metrics available for attestation: under/over for...
+  - Any [block stat]() for a specific block
+  - Any block stat for a range of blocks (min, max, mean)
+  - Transaction metrics
+    - Percentage of inputs or outputs using taproot
+    - Percentage with at least one taproot input/output/either
+    - Percentage of blocks sending coinbase reward to a taproot output
+  - Difficulty increased/decreased
+
+### User Stories
+
+Here are some potential use cases we are targetting for the alpha release:
+
+> I believe there will be at least one block during the next difficulty
+> adjustment period that sends its coinbase reward to a taproot output.
+
+> I believe at least 25% of transaction outputs during the next month
+> will be using taproot.
+
+> I believe the difficulty of the next adjustment period will increase.
+
+### Out of scope
+
+The following items are desirable but will be deferred until beta or
+later releases:
+
+- [Digit decomposition
+  outcomes](https://github.com/discreetlogcontracts/dlcspecs/blob/master/Oracle.md#digit-decomposition)
+- Announcements for non-taproot transaction types
+  - These should be straightforward to add, by duplicating the
+    equivalent taproot events.
+  - Only excluding them to limit repetition, to avoid unnecessary
+    re-work if major changes are needed early on.
+- Indexing chain data for faster retrieval
+  - The initial event duration is limited to a duration that can be
+    processed within one minute (or so) of polling bitcoind and
+    processing the results.
+- Trigger processing of a block as soon as it arrives
+  - Since the initial event types are measured in days, polling is
+    sufficent
 
 ---
 
