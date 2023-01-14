@@ -1,0 +1,62 @@
+<form action="{{ url_for('event') }}" method="POST">
+  Name: <input type="text" name="name"><br>
+  Begin: <input type="number" name="begin"><br>
+  End: <input type="number" name="end"><br>
+  Comparison type: <br>
+    <input type="radio" id="over" name="comparison" value="greater"/>
+    <label for="over">Over</label><br>
+    <input type="radio" id="overinc" name="comparison" value="greaterequal"/>
+    <label for="overinc">Over or equal</label><br>
+    <input type="radio" id="underinc" name="comparison" value="lesserequal"/>
+    <label for="underinc">Under or equal</label><br>
+    <input type="radio" id="under" name="comparison" value="lesser"/>
+    <label for="under">Under</label><br><br>
+  Value: <input type="number" name="value"><br>
+  Metric<br>
+    <input type="radio" id="avgfee" name="metric" value="avgfee"/>
+    <label for="avgfee">Average fee</label><br>
+    <input type="radio" id="avgfeerate" name="metric" value="avgfeerate"/>
+    <label for="avgfeerate">Average fee rate</label><br>
+    <input type="radio" id="avgtxsize" name="metric" value="avgtxsize"/>
+    <label for="avgtxsize">Average transaction size</label><br>
+    <input type="radio" id="maxfee" name="metric" value="maxfee"/>
+    <label for="maxfee">Maximum fee</label><br>
+    <input type="radio" id="maxfeerate" name="metric" value="maxfeerate"/>
+    <label for="maxfeerate">Maximum fee rate</label><br>
+    <input type="radio" id="maxtxsize" name="metric" value="maxtxsize"/>
+    <label for="maxtxsize">Maximum transaction size</label><br>
+    <input type="radio" id="medianfee" name="metric" value="medianfee"/>
+    <label for="medianfee">Median Fee</label><br>
+    <input type="radio" id="mediantxsize" name="metric" value="mediantxsize"/>
+    <label for="mediantxsize">Median transaction size</label><br>
+    <input type="radio" id="minfee" name="metric" value="minfee"/>
+    <label for="minfee">Minimum fee</label><br>
+    <input type="radio" id="minfeerate" name="metric" value="minfeerate"/>
+    <label for="minfeerate">Minimum fee rate</label><br>
+    <input type="radio" id="mintxsize" name="metric" value="mintxsize"/>
+    <label for="mintxsize">Minimum transaction size</label><br>
+    <input type="radio" id="outs" name="metric" value="outs"/>
+    <label for="outs">Outputs</label><br>
+    <input type="radio" id="swtotal_size" name="metric" value="swtotal_size"/>
+    <label for="swtotal_size">Witness total size</label><br>
+    <input type="radio" id="swtotal_weight" name="metric" value="swtotal_weight"/>
+    <label for="swtotal_weight">Witness total weight</label><br>
+    <input type="radio" id="swtxs" name="metric" value="swtxs"/>
+    <label for="swtxs">Segwit transactions</label><br>
+    <input type="radio" id="total_out" name="metric" value="total_out"/>
+    <label for="total_out">Total value out</label><br>
+    <input type="radio" id="total_size" name="metric" value="total_size"/>
+    <label for="total_size"></label>Total size<br>
+    <input type="radio" id="total_weight" name="metric" value="total_weight"/>
+    <label for="total_weight">Total weight</label><br>
+    <input type="radio" id="totalfee" name="metric" value="totalfee"/>
+    <label for="totalfee">Total fee</label><br>
+    <input type="radio" id="txs" name="metric" value="txs"/>
+    <label for="txs">Transaction count</label><br>
+    <input type="radio" id="utxo_increase" name="metric" value="utxo_increase"/>
+    <label for="utxo_increase">UTXO increase</label><br>
+    <input type="radio" id="utxo_size_inc" name="metric" value="utxo_size_inc"/>
+    <label for="utxo_size_inc">UTXO size increase</label><br><br>
+  <br>
+  <input type="submit" value="Submit"><br>
+</form>
